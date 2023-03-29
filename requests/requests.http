@@ -1,0 +1,23 @@
+GET localhost:8080/api/v1/books
+
+###
+
+GET localhost:8080/api/v1/books/9783161484100
+
+###
+
+POST localhost:8080/api/v1/books
+Content-Type: application/json
+
+{
+  "isbn": "incorrect",
+  "title": "title",
+  "author": "author",
+  "price": 20.22
+}
+
+###
+
+DELETE localhost:8080/api/v1/books/9783161484100
+
+###
