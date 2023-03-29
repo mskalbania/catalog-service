@@ -26,7 +26,9 @@ jobs:
           severity-cutoff: low
       - name: upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
       - name: Inspect action SARIF report
+        if: success() || failure()
         run: cat ${{ steps.scan.outputs.sarif }}
