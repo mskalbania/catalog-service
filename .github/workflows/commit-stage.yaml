@@ -20,7 +20,7 @@ jobs:
         uses: anchore/scan-action@v3
         id: scan
         with:
-          path: "${{ github.workspace }}"
+          path: "."
           fail-build: true
           severity-cutoff: low
       - name: upload Anchore scan SARIF report
