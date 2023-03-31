@@ -21,27 +21,27 @@ public class BookJsonTest {
         var book = new Book("1234567890", "Title", "Author", BigDecimal.valueOf(2.22));
         var jsonContent = json.write(book);
         assertThat(jsonContent).extractingJsonPathStringValue("$.isbn")
-                .isEqualTo(book.isbn());
+            .isEqualTo(book.isbn());
         assertThat(jsonContent).extractingJsonPathStringValue("$.title")
-                .isEqualTo(book.title());
+            .isEqualTo(book.title());
         assertThat(jsonContent).extractingJsonPathStringValue("$.author")
-                .isEqualTo(book.author());
+            .isEqualTo(book.author());
         assertThat(jsonContent).extractingJsonPathNumberValue("$.price")
-                .isEqualTo(book.price().doubleValue());
+            .isEqualTo(book.price().doubleValue());
     }
 
     @Test
     void deserializationTest() throws Exception {
         var content = """     
-                {
-                  "isbn": "1234567890",
-                  "title": "Title",
-                  "author": "Author",
-                  "price": 9.90
-                }
-                """;
+            {
+              "isbn": "1234567890",
+              "title": "Title",
+              "author": "Author",
+              "price": 9.90
+            }
+            """;
         assertThat(json.parse(content))
-                .usingRecursiveComparison()
-                .isEqualTo(new Book("1234567890", "Title", "Author", BigDecimal.valueOf(9.90).setScale(2)));
+            .usingRecursiveComparison()
+            .isEqualTo(new Book("1234567890", "Title", "Author", BigDecimal.valueOf(9.90).setScale(2)));
     }
 }

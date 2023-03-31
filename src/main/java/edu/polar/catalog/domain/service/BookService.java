@@ -22,17 +22,17 @@ public class BookService {
 
     public Mono<Book> getBook(String isbn) {
         return bookRepository.findByIsbn(isbn)
-                .switchIfEmpty(Mono.error(new BookNotFoundException(isbn)));
+            .switchIfEmpty(Mono.error(new BookNotFoundException(isbn)));
     }
 
     public Mono<Book> addBook(Book book) {
         return bookRepository.findByIsbn(book.isbn())
-                .flatMap(__ -> Mono.<Book>error(new BookAlreadyExistsException(book.isbn())))
-                .switchIfEmpty(bookRepository.save(book));
+            .flatMap(__ -> Mono.<Book>error(new BookAlreadyExistsException(book.isbn())))
+            .switchIfEmpty(bookRepository.save(book));
     }
 
     public Mono<Book> deleteBook(String isbn) {
         return bookRepository.delete(isbn)
-                .switchIfEmpty(Mono.error(new BookNotFoundException(isbn)));
+            .switchIfEmpty(Mono.error(new BookNotFoundException(isbn)));
     }
 }

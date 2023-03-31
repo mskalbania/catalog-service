@@ -20,28 +20,28 @@ public class Validations {
     private final Validator validator;
 
     public <T> Mono<ServerResponse> withValidation(
-            ServerRequest serverRequest,
-            Class<T> bodyType,
-            Function<T, Mono<ServerResponse>> handler
+        ServerRequest serverRequest,
+        Class<T> bodyType,
+        Function<T, Mono<ServerResponse>> handler
     ) {
         return serverRequest.bodyToMono(bodyType)
-                .flatMap(body -> {
-                    Errors errors = new BeanPropertyBindingResult(body, bodyType.getName());
-                    this.validator.validate(body, errors);
-                    if (errors.getAllErrors().isEmpty()) {
-                        return handler.apply(body);
-                    } else {
-                        return onValidationErrors(errors, serverRequest);
-                    }
-                });
+            .flatMap(body -> {
+                Errors errors = new BeanPropertyBindingResult(body, bodyType.getName());
+                this.validator.validate(body, errors);
+                if (errors.getAllErrors().isEmpty()) {
+                    return handler.apply(body);
+                } else {
+                    return onValidationErrors(errors);
+                }
+            });
     }
 
-    private Mono<ServerResponse> onValidationErrors(Errors errors, ServerRequest request) {
+    private Mono<ServerResponse> onValidationErrors(Errors errors) {
         return ErrorResponse.badRequest(
-                errors.getFieldErrors()
-                        .stream()
-                        .map(error -> error.getField() + " " + error.getDefaultMessage())
-                        .collect(Collectors.toList())
+            errors.getFieldErrors()
+                .stream()
+                .map(error -> error.getField() + " " + error.getDefaultMessage())
+                .collect(Collectors.toList())
         );
     }
 }

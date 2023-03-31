@@ -26,7 +26,7 @@ public class InMemoryBookRepository implements BookRepository {
     @Override
     public Mono<Book> save(Book book) {
         return Mono.fromCallable(() -> isbnToBook.put(book.isbn(), book))
-                .switchIfEmpty(Mono.just(book));
+            .switchIfEmpty(Mono.just(book));
     }
 
     @Override

@@ -15,11 +15,11 @@ public class Routes {
     @Bean
     public RouterFunction<ServerResponse> router(BookHandler bookHandler) {
         return route().nest(RequestPredicates.path("/api/v1"), builder ->
-                builder
-                        .GET("/books", bookHandler::getBooks)
-                        .POST("/books", bookHandler::addBook)
-                        .GET("/books/{isbn}", bookHandler::getBookByIsbn)
-                        .DELETE("/books/{isbn}", bookHandler::deleteBook)
+            builder
+                .GET("/books", bookHandler::getBooks)
+                .POST("/books", bookHandler::addBook)
+                .GET("/books/{isbn}", bookHandler::getBookByIsbn)
+                .DELETE("/books/{isbn}", bookHandler::deleteBook)
         ).build();
     }
 }

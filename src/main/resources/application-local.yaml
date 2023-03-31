@@ -1,0 +1,9 @@
+application:
+  test-data-enabled: true
+server:
+  port: 8080
+#spring:
+#  r2dbc:
+#    url: r2dbc:postgresql://127.0.0.1:5433/postgres
+#    username: postgres
+#    password: postgres

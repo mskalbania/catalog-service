@@ -1,0 +1,10 @@
+spring:
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      enabled: true
+      uri: "TBD"
+      fail-fast: true
+      request-connect-timeout: 5000
+      request-read-timeout: 5000

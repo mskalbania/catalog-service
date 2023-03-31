@@ -29,17 +29,17 @@ class BookHandlerTest {
     public void shouldCorrectlyHandleGetBook() {
         //given book exist
         given(bookService.getBook(ANY_ISBN))
-                .willReturn(Mono.just(new Book(ANY_ISBN, ANY_TITLE, ANY_AUTHOR, ANY_PRICE)));
+            .willReturn(Mono.just(new Book(ANY_ISBN, ANY_TITLE, ANY_AUTHOR, ANY_PRICE)));
 
         //when handler called
         var exchange = webTestClient.get()
-                .uri("/api/v1/books/" + ANY_ISBN)
-                .exchange();
+            .uri("/api/v1/books/" + ANY_ISBN)
+            .exchange();
 
         //then correct body returned
         exchange.expectBody()
-                .consumeWith(System.out::println)
-                .jsonPath("$.isbn").isEqualTo(ANY_ISBN);
+            .consumeWith(System.out::println)
+            .jsonPath("$.isbn").isEqualTo(ANY_ISBN);
     }
 
     //and more...

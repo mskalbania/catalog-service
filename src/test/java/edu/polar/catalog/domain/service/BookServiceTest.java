@@ -24,10 +24,10 @@ class BookServiceTest {
 
         //then error returned
         StepVerifier.create(bookMono)
-                .expectErrorSatisfies(throwable -> {
-                    Assertions.assertInstanceOf(BookNotFoundException.class, throwable);
-                    Assertions.assertEquals("Book with isbn " + ANY_ISBN + " not found", throwable.getMessage());
-                }).verify();
+            .expectErrorSatisfies(throwable -> {
+                Assertions.assertInstanceOf(BookNotFoundException.class, throwable);
+                Assertions.assertEquals("Book with isbn " + ANY_ISBN + " not found", throwable.getMessage());
+            }).verify();
     }
 
     //An so on../

@@ -10,12 +10,12 @@ public record ErrorResponse(int code, LocalDateTime timestamp, List<String> mess
 
     public static Mono<ServerResponse> badRequest(List<String> messages) {
         return ServerResponse.badRequest()
-                .bodyValue(new ErrorResponse(400, LocalDateTime.now(), messages));
+            .bodyValue(new ErrorResponse(400, LocalDateTime.now(), messages));
     }
 
     public static Mono<ServerResponse> unprocessableEntity(String message) {
         return ServerResponse.unprocessableEntity()
-                .bodyValue(new ErrorResponse(422, LocalDateTime.now(), List.of(message)));
+            .bodyValue(new ErrorResponse(422, LocalDateTime.now(), List.of(message)));
     }
 
     public static Mono<ServerResponse> notFound() {
